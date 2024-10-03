@@ -24,6 +24,7 @@ const App = () => {
               username: user.username,
               isPremium: user.is_premium,
               languageCode: user.language_code,
+              photoUrl: user.photo_url, // Fetch the user's profile picture URL
             });
           }
         }
@@ -44,6 +45,13 @@ const App = () => {
           <p>Username: {telegramUser.username}</p>
           <p>Premium User: {telegramUser.isPremium ? "Yes" : "No"}</p>
           <p>Language: {telegramUser.languageCode}</p>
+          {telegramUser.photoUrl && (
+            <img
+              src={telegramUser.photoUrl}
+              alt={`${telegramUser.firstName}'s Profile`}
+              style={{ borderRadius: "50%", width: "100px", height: "100px" }}
+            />
+          )}
         </div>
       ) : (
         <p>Loading user data...</p>
