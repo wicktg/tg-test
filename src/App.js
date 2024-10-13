@@ -18,6 +18,9 @@ const App = () => {
           window.Telegram.WebApp.ready();
           const user = window.Telegram.WebApp.initDataUnsafe?.user;
 
+          // Log the user object to check if `photo_url` exists
+          console.log("Telegram User Data:", user);
+
           if (user) {
             setTelegramUser({
               firstName: user.first_name,
@@ -26,6 +29,7 @@ const App = () => {
               isPremium: user.is_premium,
               languageCode: user.language_code,
               photoUrl: user.photo_url,
+              photoUrl: user.photo_url, // Attempt to fetch the profile picture URL
             });
           }
         }
