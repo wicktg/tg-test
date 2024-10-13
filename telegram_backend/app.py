@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
 from telethon import TelegramClient
 from telethon.tl.types import UserStatusOnline, UserStatusOffline
 import asyncio
