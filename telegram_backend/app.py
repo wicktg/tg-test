@@ -3,8 +3,10 @@ from flask_cors import CORS  # Import CORS
 from telethon import TelegramClient
 from telethon.tl.types import UserStatusOnline, UserStatusOffline
 import asyncio
+import threading
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 api_id = '16897600'  # Replace with your API ID
 api_hash = 'fb17a18ce8630d5991563c45cc5ce25f'  # Replace with your API Hash
@@ -43,6 +45,17 @@ def format_last_seen(status):
     elif isinstance(status, UserStatusOffline):
         return status.was_online.isoformat()  # Format as desired
 
+def run_flask():
+    app.run(port=5000)
+
+async def main():
+    async with client:
+        await client.start()
+
 if __name__ == '__main__':
-    asyncio.run(client.start())
-    app.run(port=5000)  # Start the Flask app on port 5000
+    # Start the Flask app in a separate thread
+    flask_thread = threading.Thread(target=run_flask)
+    flask_thread.start()
+
+    # Run the Telegram client in the main thread
+    asyncio.run(main())
