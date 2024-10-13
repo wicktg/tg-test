@@ -52,7 +52,7 @@ def format_last_seen(status):
 
 def run_flask():
     """Run the Flask application."""
-    app.run(port=5000)
+    app.run(port=5000,  debug=True)
 
 async def main():
     """Start the Telegram client."""
